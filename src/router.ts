@@ -7,6 +7,9 @@ import { getSongQuerySchema } from "@/handlers/songs/dtos/getSong.request";
 import { listSongQuerySchema } from "@/handlers/songs/dtos/listSong.request";
 import { getSongResponse } from "@/handlers/songs/dtos/getSong.response";
 import { listSongResponse } from "@/handlers/songs/dtos/listSong.response";
+import { getPopularSongQuerySchema } from "@/handlers/songs/dtos/getPopularSongs.request";
+import { getPopularSongResponseSchema } from "@/handlers/songs/dtos/getPopularSongs.response";
+import { getPopularSongs } from "@/handlers/songs/getPopularSongs";
 
 const healthCheckRoute = createRoute({
   method: "get",
@@ -61,10 +64,30 @@ export const getSongRoute = createRoute({
   },
 });
 
+export const getPopularSongsRoute = createRoute({
+  method: "get",
+  path: "/songs/popular",
+  request: {
+    query: getPopularSongQuerySchema,
+  },
+  responses: {
+    200: {
+      description: "OK",
+      content: {
+        "application/json": {
+          schema: getPopularSongResponseSchema,
+        },
+      },
+    },
+  },
+});
+
 export const router = createRouter()
   .openapi(healthCheckRoute, healthCheck)
   .openapi(listSongRoute, listSongs)
+  .openapi(getPopularSongsRoute, getPopularSongs)
   .openapi(getSongRoute, getSong);
 
 export type ListSongRoute = typeof listSongRoute;
 export type GetSongRoute = typeof getSongRoute;
+export type GetPopularSong = typeof getPopularSongsRoute;

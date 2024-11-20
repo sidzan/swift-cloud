@@ -2,6 +2,7 @@ import type { ListSongRoute } from "@/router";
 import { prisma } from "@/services/db/prisma";
 import { type RouteHandler } from "@hono/zod-openapi";
 import { Prisma } from "@prisma/client";
+import { defaultSongIncludes } from "@/handlers/songs/helpers/queryHelpers";
 
 export const listSongs: RouteHandler<ListSongRoute> = async (c) => {
   const query = c.req.valid("query");
@@ -24,47 +25,10 @@ export const listSongs: RouteHandler<ListSongRoute> = async (c) => {
       }),
     },
   };
+
   const songs = await prisma.song.findMany({
     where: searchQuery.where,
-    include: {
-      album: {
-        select: {
-          id: true,
-          title: true,
-        },
-      },
-      artists: {
-        select: {
-          id: true,
-          role: true,
-          artist: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-        },
-      },
-      songWriters: {
-        select: {
-          id: true,
-          writer: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-        },
-      },
-      plays: {
-        select: {
-          id: true,
-          month: true,
-          year: true,
-          count: true,
-        },
-      },
-    },
+    include: defaultSongIncludes,
     skip: offset,
     take: limit,
   });

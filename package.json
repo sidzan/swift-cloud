@@ -18,7 +18,7 @@
     "@hono/zod-openapi": "^0.18.0",
     "@prisma/client": "^5.22.0",
     "@prisma/extension-accelerate": "^1.2.1",
-    "@scalar/hono-api-reference": "^0.5.159",
+    "@scalar/hono-api-reference": "^0.5.160",
     "bun": "^1.1.36",
     "hono": "^4.6.10"
   },
