@@ -10,10 +10,13 @@ import { listSongResponse } from "@/handlers/songs/dtos/listSong.response";
 import { getPopularSongQuerySchema } from "@/handlers/songs/dtos/getPopularSongs.request";
 import { getPopularSongResponseSchema } from "@/handlers/songs/dtos/getPopularSongs.response";
 import { getPopularSongs } from "@/handlers/songs/getPopularSongs";
+import { getArtistsResponse } from "@/handlers/artists/dtos/getArtistsResponse";
+import { getArtists } from "@/handlers/artists/getArtists";
 
 const healthCheckRoute = createRoute({
   method: "get",
   path: "/health-check",
+  tags: ["System"],
   responses: {
     200: {
       description: "OK",
@@ -31,6 +34,7 @@ const healthCheckRoute = createRoute({
 export const listSongRoute = createRoute({
   method: "get",
   path: "/songs",
+  tags: ["Songs"],
   request: {
     query: listSongQuerySchema,
   },
@@ -48,6 +52,7 @@ export const listSongRoute = createRoute({
 
 export const getSongRoute = createRoute({
   method: "get",
+  tags: ["Songs"],
   path: "/songs/{id}",
   request: {
     params: getSongQuerySchema,
@@ -70,6 +75,7 @@ export const getPopularSongsRoute = createRoute({
   request: {
     query: getPopularSongQuerySchema,
   },
+  tags: ["Songs"],
   responses: {
     200: {
       description: "OK",
@@ -82,12 +88,30 @@ export const getPopularSongsRoute = createRoute({
   },
 });
 
+export const getArtistsRoute = createRoute({
+  method: "get",
+  path: "/artists",
+  tags: ["artists"],
+  responses: {
+    200: {
+      description: "OK",
+      content: {
+        "application/json": {
+          schema: getArtistsResponse,
+        },
+      },
+    },
+  },
+});
+
 export const router = createRouter()
   .openapi(healthCheckRoute, healthCheck)
   .openapi(listSongRoute, listSongs)
   .openapi(getPopularSongsRoute, getPopularSongs)
-  .openapi(getSongRoute, getSong);
+  .openapi(getSongRoute, getSong)
+  .openapi(getArtistsRoute, getArtists);
 
 export type ListSongRoute = typeof listSongRoute;
 export type GetSongRoute = typeof getSongRoute;
 export type GetPopularSong = typeof getPopularSongsRoute;
+export type GetArtists = typeof getArtistsRoute;
