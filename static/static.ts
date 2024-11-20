@@ -99,7 +99,7 @@ button:hover {
   <main>
   <h1>Welcome to Swift Club</h1>
 <p></p>
-<button onclick="redirectToPage()">Let' see some docs</button>
+<button onclick="redirectToPage()">Let's see some docs</button>
 </main>
 
 <div class="footer">
