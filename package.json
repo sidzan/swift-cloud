@@ -1,0 +1,25 @@
+{
+  "name": "node-hono",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@hono/swagger-ui": "^0.4.1",
+    "@hono/zod-openapi": "^0.18.0",
+    "@prisma/client": "^5.22.0",
+    "@prisma/extension-accelerate": "^1.2.1",
+    "@scalar/hono-api-reference": "^0.5.159",
+    "hono": "^4.6.10"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.9.2",
+    "@types/node": "^20.11.17",
+    "csv-parse": "^5.5.6",
+    "eslint": "^9.15.0",
+    "eslint-plugin-format": "^0.1.2",
+    "tsx": "^4.7.1"
+  }
+}

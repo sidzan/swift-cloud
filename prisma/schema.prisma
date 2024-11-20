@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Song {
+  id          String       @id @default(uuid())
+  title       String
+  album       Album?       @relation(fields: [albumId], references: [id])
+  albumId     String?
+  year        String
+  plays       Plays[]
+  artists     SongArtist[]
+  songWriters SongWriter[] // Many-to-many relation with writers through SongWriter
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SongArtist {
+  id       String     @id @default(uuid())
+  song     Song       @relation(fields: [songId], references: [id], onDelete: Cascade)
+  songId   String
+  artist   Artist     @relation(fields: [artistId], references: [id])
+  artistId String
+  role     ArtistRole // Defines the role as primary or featured
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([songId, artistId]) // Ensures each artist is associated only once per song
+}
+
+enum ArtistRole {
+  PRIMARY
+  FEATURED
+}
+
+model Artist {
+  id    String       @id @default(uuid())
+  name  String       @unique
+  songs SongArtist[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Album     Album[]
+}
+
+model Album {
+  id       String @id @default(uuid())
+  title    String
+  year     Int
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  artistId String
+  songs    Song[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Writer {
+  id          String       @id @default(uuid())
+  name        String       @unique
+  songWriters SongWriter[] // Many-to-many relation with songs through SongWriter
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SongWriter {
+  id       String @id @default(uuid())
+  song     Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
+  songId   String
+  writer   Writer @relation(fields: [writerId], references: [id], onDelete: Cascade)
+  writerId String
+
+  @@unique([songId, writerId]) // Ensures each writer is associated with a song only once
+}
+
+model Plays {
+  id     String @id @default(uuid())
+  song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
+  songId String
+  month  Int // 1-12, representing Jan-Dec
+  year   Int
+  count  Int // Number of plays in that month
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([songId, month, year]) // Ensures one record per song per month and year
+}
