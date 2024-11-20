@@ -1,4 +1,4 @@
-#  [Swift Cloud](https://swift-app.fly.dev/static/)
+#  [Swift Cloud](https://swift-app.fly.dev/)
 
 
 Welcome to the **Swifty Land**! This guide will help you set up, run, and test the project.

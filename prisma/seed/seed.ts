@@ -50,7 +50,6 @@ async function main() {
         const existingAlbum = await prisma.album.findFirst({
           where: {
             title: record.Album,
-            artistId: albumArtist.id,
           },
         });
 
@@ -59,7 +58,6 @@ async function main() {
             data: {
               title: record.Album,
               year: Number.parseInt(record.Year),
-              artistId: albumArtist.id,
             },
           });
         } else {

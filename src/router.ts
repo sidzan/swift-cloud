@@ -12,6 +12,8 @@ import { getPopularSongResponseSchema } from "@/handlers/songs/dtos/getPopularSo
 import { getPopularSongs } from "@/handlers/songs/getPopularSongs";
 import { getArtistsResponse } from "@/handlers/artists/dtos/getArtistsResponse";
 import { getArtists } from "@/handlers/artists/getArtists";
+import { listAlbumsResponseSchema } from "@/handlers/albums/dtos/listAlbumsResponseSchema";
+import { listAlbums } from "@/handlers/albums/listAlbums";
 
 const healthCheckRoute = createRoute({
   method: "get",
@@ -91,7 +93,7 @@ export const getPopularSongsRoute = createRoute({
 export const getArtistsRoute = createRoute({
   method: "get",
   path: "/artists",
-  tags: ["artists"],
+  tags: ["Artists"],
   responses: {
     200: {
       description: "OK",
@@ -104,14 +106,32 @@ export const getArtistsRoute = createRoute({
   },
 });
 
+export const listAlbumsRoute = createRoute({
+  method: "get",
+  path: "/albums",
+  tags: ["Albums"],
+  responses: {
+    200: {
+      description: "OK",
+      content: {
+        "application/json": {
+          schema: listAlbumsResponseSchema,
+        },
+      },
+    },
+  },
+});
+
 export const router = createRouter()
   .openapi(healthCheckRoute, healthCheck)
   .openapi(listSongRoute, listSongs)
   .openapi(getPopularSongsRoute, getPopularSongs)
   .openapi(getSongRoute, getSong)
-  .openapi(getArtistsRoute, getArtists);
+  .openapi(getArtistsRoute, getArtists)
+  .openapi(listAlbumsRoute, listAlbums);
 
 export type ListSongRoute = typeof listSongRoute;
 export type GetSongRoute = typeof getSongRoute;
 export type GetPopularSong = typeof getPopularSongsRoute;
 export type GetArtists = typeof getArtistsRoute;
+export type ListAlbum = typeof listAlbumsRoute;
