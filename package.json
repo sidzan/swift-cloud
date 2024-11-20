@@ -3,7 +3,14 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate": "prisma generate",
+    "prod": "bun run dist/index.js",
+    "start": "node ./dist/src/index.js",
+    "typecheck": "tsc --noEmit",
+    "lint:fix": "npm run lint --fix",
+    "test": "cross-env NODE_ENV=test vitest",
+    "build": "tsc && tsc-alias"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
@@ -12,6 +19,7 @@
     "@prisma/client": "^5.22.0",
     "@prisma/extension-accelerate": "^1.2.1",
     "@scalar/hono-api-reference": "^0.5.159",
+    "bun": "^1.1.36",
     "hono": "^4.6.10"
   },
   "devDependencies": {
@@ -20,6 +28,8 @@
     "csv-parse": "^5.5.6",
     "eslint": "^9.15.0",
     "eslint-plugin-format": "^0.1.2",
+    "prisma": "^5.22.0",
+    "tsc-alias": "^1.8.10",
     "tsx": "^4.7.1"
   }
 }
