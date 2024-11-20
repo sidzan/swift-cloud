@@ -10,10 +10,7 @@
     "typecheck": "tsc --noEmit",
     "lint:fix": "npm run lint --fix",
     "test": "cross-env NODE_ENV=test vitest",
-    "build": "tsc && tsc-alias",
-    "prisma-generate": "prisma generate",
-    "postinstall": "npm run prisma-generate",
-    "seed": "bun run prisma/seed/seed.ts"
+    "build": "tsc && tsc-alias"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
