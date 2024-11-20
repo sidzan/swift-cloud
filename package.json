@@ -1,6 +1,9 @@
 {
   "name": "node-hono",
   "type": "module",
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "lint": "eslint",
@@ -10,7 +13,10 @@
     "typecheck": "tsc --noEmit",
     "lint:fix": "npm run lint --fix",
     "test": "cross-env NODE_ENV=test vitest",
-    "build": "tsc && tsc-alias"
+    "build": "tsc && tsc-alias",
+    "prisma-generate": "prisma generate",
+    "postinstall": "npm run prisma-generate",
+    "seed": "bun run prisma/seed/seed.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
@@ -25,6 +31,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.9.2",
     "@types/node": "^20.11.17",
+    "cross-env": "^7.0.3",
     "csv-parse": "^5.5.6",
     "eslint": "^9.15.0",
     "eslint-plugin-format": "^0.1.2",

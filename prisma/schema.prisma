@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider             = "prisma-client-js"
   experimentalFeatures = ["joinRelations"]
@@ -19,7 +16,7 @@ model Song {
   year        String
   plays       Plays[]
   artists     SongArtist[]
-  songWriters SongWriter[] // Many-to-many relation with writers through SongWriter
+  songWriters SongWriter[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -31,12 +28,12 @@ model SongArtist {
   songId   String
   artist   Artist     @relation(fields: [artistId], references: [id])
   artistId String
-  role     ArtistRole // Defines the role as primary or featured
+  role     ArtistRole
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([songId, artistId]) // Ensures each artist is associated only once per song
+  @@unique([songId, artistId])
 }
 
 enum ArtistRole {
@@ -69,7 +66,7 @@ model Album {
 model Writer {
   id          String       @id @default(uuid())
   name        String       @unique
-  songWriters SongWriter[] // Many-to-many relation with songs through SongWriter
+  songWriters SongWriter[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -82,19 +79,19 @@ model SongWriter {
   writer   Writer @relation(fields: [writerId], references: [id], onDelete: Cascade)
   writerId String
 
-  @@unique([songId, writerId]) // Ensures each writer is associated with a song only once
+  @@unique([songId, writerId])
 }
 
 model Plays {
   id     String @id @default(uuid())
   song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
   songId String
-  month  Int // 1-12, representing Jan-Dec
+  month  Int
   year   Int
-  count  Int // Number of plays in that month
+  count  Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([songId, month, year]) // Ensures one record per song per month and year
+  @@unique([songId, month, year])
 }
