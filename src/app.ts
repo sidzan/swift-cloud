@@ -2,11 +2,14 @@ import configureOpenAPI from "@/lib/configureOpenApi";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { logger } from "hono/logger";
 import { router } from "./router";
+import { staticHTML } from "../static/static";
 
 export function createApp() {
   const app = new OpenAPIHono();
   configureOpenAPI(app);
-  app.use(logger());
+  app.use(logger()).get("/", (c) => {
+    return c.html(staticHTML);
+  });
 
   const routes = [router];
 

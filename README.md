@@ -1,4 +1,4 @@
-#  [Swift Cloud](https://swift-cloud.fly.dev/ui)
+#  [Swift Cloud](https://swift-app.fly.dev/static/)
 
 
 Welcome to the **Swifty Land**! This guide will help you set up, run, and test the project.
@@ -44,7 +44,7 @@ npm run test
 ## 🌐 Production URL
 
 The production version of this project is available at:  
-[https://swift-cloud.fly.dev/ui](https://swift-cloud.fly.dev/ui)
+[https://swift-app.fly.dev/ui](https://swift-app.fly.dev/ui)
 
 ---
 
@@ -58,5 +58,9 @@ npm run seed
 
 - Ensure Docker is installed and running before executing `docker compose up`.
 - Modify the `docker-compose.yml` or `.env` files if required to suit your local environment.
+
+## Future Enhancements
+- Search with Elastic search (200 million records needs some muscles)
+- API's for Artists & Albums
 
 Happy coding! 🎉
