@@ -1,9 +1,6 @@
 {
   "name": "node-hono",
   "type": "module",
-  "prisma": {
-    "schema": "./prisma/schema.prisma"
-  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "lint": "eslint",
