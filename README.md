@@ -49,7 +49,7 @@ The production version of this project is available at:
 ---
 
 ## 🌱 Looking to seed ?
-Run the following command to install all necessary dependencies:
+Run the following command to seed the corns:
 ```bash
 npm run seed
 ```
