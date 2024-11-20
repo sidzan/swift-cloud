@@ -8,7 +8,6 @@ import { listSongQuerySchema } from "@/handlers/songs/dtos/listSong.request";
 import { getSongResponse } from "@/handlers/songs/dtos/getSong.response";
 import { listSongResponse } from "@/handlers/songs/dtos/listSong.response";
 
-// Create Zod schema from Prisma type
 const healthCheckRoute = createRoute({
   method: "get",
   path: "/health-check",
