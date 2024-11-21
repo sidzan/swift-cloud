@@ -54,6 +54,25 @@ Run the following command to seed the corns:
 npm run seed
 ```
 
+## 🛠️ Technologies Used
+
+This project is built and hosted using the following technologies:
+
+1. **Prisma**: For database ORM and schema management.  
+   Website: [https://www.prisma.io/](https://www.prisma.io/)
+
+2. **Neon Tech**: For hosting the PostgreSQL database.  
+   Website: [https://neon.tech/](https://neon.tech/)
+
+3. **Hono**: A lightweight and fast web framework for building the backend.  
+   Website: [https://hono.dev/](https://hono.dev/)
+
+4. **Fly.io**: For hosting the application, providing scalable deployment.  
+   Website: [https://fly.io/](https://fly.io/)
+
+5. **GitHub Actions**: For continuous integration and deployment (CI/CD) to Fly.io.  
+   Website: [https://github.com/features/actions](https://github.com/features/actions)
+
 ## 💡 Notes
 
 - Ensure Docker is installed and running before executing `docker compose up`.
